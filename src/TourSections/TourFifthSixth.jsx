@@ -6,7 +6,7 @@ const slideshowImages = [
   "/fif2.jpg",
   "/fif3.jpg",
   "/fif4.jpg",
-    "/fif5.jpg",
+  "/fif5.jpg",
 
   // Add more images as needed
 ];
@@ -14,6 +14,7 @@ const slideshowImages = [
 export default function TourFifthSixth() {
   const [step, setStep] = useState(0);
   const [slide, setSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,34 +32,42 @@ export default function TourFifthSixth() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 800);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <section
       style={{
         minHeight: "92vh",
         width: "96vw",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: isMobile ? "column" : "row",
         alignItems: "center",
         justifyContent: "center",
-        background: "linear-gradient(135deg, #ffe6e6 0%, #e53e3e 100%)", // Red gradient
+        background: "linear-gradient(135deg, #ffe6e6 0%, #e53e3e 100%)",
         borderRadius: "1.2rem",
         boxShadow: "0 6px 24px 0 rgba(229, 62, 62, 0.13)",
-        padding: "2.8rem 2rem",
+        padding: isMobile ? "1.2rem 0.5rem" : "2.8rem 2rem",
         margin: "2vh auto",
         position: "relative",
         overflow: "hidden",
         maxWidth: "100vw",
+        gap: isMobile ? "2rem" : "0",
       }}
     >
       {/* Left: Teacher Image, Titles, and Next Button */}
       <div
         style={{
-          flex: "0 0 50%",
+          flex: isMobile ? "unset" : "0 0 50%",
+          width: isMobile ? "100%" : "auto",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "flex-start",
-          minHeight: 540,
+          minHeight: isMobile ? "unset" : 540,
           position: "relative",
           height: "100%",
         }}
@@ -67,13 +76,14 @@ export default function TourFifthSixth() {
           src="/fifthgradeteacher.jpg"
           alt="Fifth and Sixth Grade Teacher"
           style={{
-            width: "360px",
-            height: "468px",
+            width: isMobile ? "90vw" : "360px",
+            maxWidth: "100%",
+            height: isMobile ? "auto" : "468px",
             borderRadius: "1.2rem",
             objectFit: "cover",
             boxShadow: "0 10px 38px 0 rgba(229, 62, 62, 0.16)",
             background: "#fff",
-            marginTop: "2vh",
+            marginTop: isMobile ? "1vh" : "2vh",
             opacity: step >= 1 ? 1 : 0,
             transform: step >= 1
               ? "translateY(0)"
@@ -87,7 +97,7 @@ export default function TourFifthSixth() {
             marginTop: "1.2rem",
             opacity: step >= 2 ? 1 : 0,
             transition: "opacity 0.7s",
-            fontSize: "1.8rem",
+            fontSize: isMobile ? "1.2rem" : "1.8rem",
             color: "#e53e3e",
             fontWeight: "bold",
             textAlign: "center",
@@ -95,7 +105,7 @@ export default function TourFifthSixth() {
             width: "100%",
             background: "rgba(255,255,255,0.95)",
             borderRadius: "0.6rem",
-            padding: "0.4rem 1.7rem",
+            padding: isMobile ? "0.3rem 1rem" : "0.4rem 1.7rem",
           }}
         >
           Fifth &amp; Sixth Grade Teacher
@@ -105,7 +115,7 @@ export default function TourFifthSixth() {
           style={{
             opacity: step >= 3 ? 1 : 0,
             transition: "opacity 0.7s",
-            fontSize: "1.5rem",
+            fontSize: isMobile ? "1rem" : "1.5rem",
             color: "#822727",
             fontWeight: "bold",
             textAlign: "center",
@@ -114,7 +124,7 @@ export default function TourFifthSixth() {
             letterSpacing: "1px",
             background: "rgba(255,255,255,0.95)",
             borderRadius: "0.6rem",
-            padding: "0.4rem 1.7rem",
+            padding: isMobile ? "0.3rem 1rem" : "0.4rem 1.7rem",
           }}
         >
           Mrs. Sarah Hartwig
@@ -127,8 +137,8 @@ export default function TourFifthSixth() {
             color: "#822727",
             border: "none",
             borderRadius: "999px",
-            padding: "0.7rem 1.8rem",
-            fontSize: "1.2rem",
+            padding: isMobile ? "0.7rem 1.5rem" : "0.7rem 1.8rem",
+            fontSize: isMobile ? "1rem" : "1.2rem",
             fontWeight: "bold",
             cursor: "pointer",
             textDecoration: "none",
@@ -164,6 +174,7 @@ export default function TourFifthSixth() {
       <div
         style={{
           flex: "1",
+          width: isMobile ? "100%" : "auto",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -178,8 +189,8 @@ export default function TourFifthSixth() {
             left: "50%",
             top: "60%",
             transform: "translate(-50%, -50%)",
-            width: "800px",
-            height: "170px",
+            width: isMobile ? "60vw" : "800px",
+            height: isMobile ? "40vw" : "170px",
             borderRadius: "50%",
             background: "radial-gradient(circle, #feb2b2aa 0%, transparent 75%)",
             filter: "blur(32px)",
@@ -190,9 +201,9 @@ export default function TourFifthSixth() {
         <h2
           style={{
             color: "#c53030",
-            fontSize: "2.8rem",
+            fontSize: isMobile ? "1.5rem" : "2.8rem",
             fontWeight: "bold",
-            marginBottom: "2rem",
+            marginBottom: isMobile ? "1rem" : "2rem",
             letterSpacing: "1.2px",
             position: "relative",
             zIndex: 1,
@@ -202,25 +213,28 @@ export default function TourFifthSixth() {
             transition: "opacity 0.7s",
             background: "rgba(255,255,255,0.85)",
             borderRadius: "0.6rem",
-            padding: "0.4rem 1.7rem",
+            padding: isMobile ? "0.3rem 1rem" : "0.4rem 1.7rem",
           }}
         >
           Welcome to Our Fifth &amp; Sixth Grade Room!
         </h2>
         <div
           style={{
-            width: "700px",
-            height: "650px",
+            width: isMobile ? "95vw" : "700px",
+            maxWidth: "100%",
+            height: isMobile ? "45vw" : "650px",
+            maxHeight: isMobile ? "60vw" : "650px",
             borderRadius: "1rem",
             overflow: "hidden",
             boxShadow: "0 7px 28px 0 rgba(229, 62, 62, 0.16)",
             background: "#fff",
-            marginBottom: "2.5rem",
+            marginBottom: isMobile ? "1.2rem" : "2.5rem",
             position: "relative",
             zIndex: 1,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            aspectRatio: isMobile ? "4/3" : undefined,
             opacity: step >= 5 ? 1 : 0,
             transition: "opacity 0.7s",
           }}

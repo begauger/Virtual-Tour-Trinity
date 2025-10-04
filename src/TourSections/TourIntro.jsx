@@ -5,6 +5,7 @@ export default function TourIntro() {
   const navigate = useNavigate();
   const [showWelcome, setShowWelcome] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -14,6 +15,12 @@ export default function TourIntro() {
       clearTimeout(welcomeTimer);
       clearTimeout(buttonTimer);
     };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 800);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Pause on last frame when video ends
@@ -85,16 +92,19 @@ export default function TourIntro() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          padding: isMobile ? "0 1rem" : 0,
         }}
       >
         <span
           style={{
             color: "#bee3f8",
-            fontSize: "2rem",
+            fontSize: isMobile ? "1.3rem" : "2rem",
             fontWeight: "bold",
-            marginBottom: "2rem",
+            marginBottom: isMobile ? "1.2rem" : "2rem",
             opacity: showWelcome ? 1 : 0,
             transition: "opacity 1.2s",
+            textAlign: "center",
+            lineHeight: 1.2,
           }}
         >
           Welcome to the Virtual Tour!
@@ -106,8 +116,8 @@ export default function TourIntro() {
             color: "#222",
             border: "none",
             borderRadius: "999px",
-            padding: "0.9rem 2.2rem",
-            fontSize: "1.2rem",
+            padding: isMobile ? "0.7rem 1.5rem" : "0.9rem 2.2rem",
+            fontSize: isMobile ? "1rem" : "1.2rem",
             fontWeight: "bold",
             cursor: "pointer",
             textDecoration: "none",

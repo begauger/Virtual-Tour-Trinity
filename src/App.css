@@ -2,6 +2,19 @@
   text-align: center;
 }
 
+/* Prevent horizontal scroll on mobile */
+body, #root, .App {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Make all images and videos responsive by default */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

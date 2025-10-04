@@ -12,8 +12,6 @@ const slideshowImages = [
   "/end8.jpg",
   "/end12.jpg",
   "/end13.jpg",
-
-  // Add more images as needed
 ];
 
 const featuredPeople = [
@@ -31,6 +29,7 @@ const featuredPeople = [
 
 export default function TourEnd() {
   const [slide, setSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,6 +37,12 @@ export default function TourEnd() {
       setSlide((prev) => (prev + 1) % slideshowImages.length);
     }, 3000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 800);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -49,10 +54,10 @@ export default function TourEnd() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        background: "linear-gradient(135deg, #e0ecff 0%, #2563eb 100%)", // Blue gradient
+        background: "linear-gradient(135deg, #e0ecff 0%, #2563eb 100%)",
         borderRadius: "1.2rem",
         boxShadow: "0 6px 24px 0 rgba(37, 99, 235, 0.13)",
-        padding: "2.8rem 2rem",
+        padding: isMobile ? "1.2rem 0.5rem" : "2.8rem 2rem",
         margin: "2vh auto",
         position: "relative",
         overflow: "hidden",
@@ -62,15 +67,15 @@ export default function TourEnd() {
       <h2
         style={{
           color: "#2563eb",
-          fontSize: "2.8rem",
+          fontSize: isMobile ? "2rem" : "2.8rem",
           fontWeight: "bold",
-          marginBottom: "2rem",
+          marginBottom: isMobile ? "1.2rem" : "2rem",
           letterSpacing: "1.2px",
           textAlign: "center",
           textShadow: "0 4px 24px #fff",
           background: "rgba(255,255,255,0.85)",
           borderRadius: "0.6rem",
-          padding: "0.4rem 1.7rem",
+          padding: isMobile ? "0.3rem 1rem" : "0.4rem 1.7rem",
         }}
       >
         Thank You for Visiting!
@@ -78,9 +83,9 @@ export default function TourEnd() {
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
-          gap: "3rem",
-          alignItems: "flex-start",
+          flexDirection: isMobile ? "column" : "row",
+          gap: isMobile ? "2rem" : "3rem",
+          alignItems: "center",
           justifyContent: "center",
           width: "100%",
           maxWidth: "1400px",
@@ -89,16 +94,19 @@ export default function TourEnd() {
         {/* Slideshow */}
         <div
           style={{
-            width: "600px",
-            height: "500px",
+            width: isMobile ? "95vw" : "600px",
+            maxWidth: "98vw",
+            height: isMobile ? "45vw" : "500px",
+            maxHeight: isMobile ? "60vw" : "500px",
             borderRadius: "1rem",
             overflow: "hidden",
             boxShadow: "0 7px 28px 0 rgba(37, 99, 235, 0.16)",
             background: "#fff",
-            marginBottom: "2.5rem",
+            marginBottom: isMobile ? "1.2rem" : "2.5rem",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            aspectRatio: isMobile ? "4/3" : undefined,
           }}
         >
           <img
@@ -117,11 +125,12 @@ export default function TourEnd() {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            gap: "2.5rem",
+            flexDirection: isMobile ? "row" : "column",
+            gap: isMobile ? "1.2rem" : "2.5rem",
             alignItems: "center",
             justifyContent: "center",
-            minWidth: "320px",
+            minWidth: isMobile ? "unset" : "320px",
+            width: isMobile ? "100%" : "auto",
           }}
         >
           {featuredPeople.map((person) => (
@@ -134,17 +143,17 @@ export default function TourEnd() {
                 background: "rgba(255,255,255,0.95)",
                 borderRadius: "1rem",
                 boxShadow: "0 4px 18px 0 rgba(37, 99, 235, 0.13)",
-                padding: "1.2rem 2.2rem",
-                minWidth: "260px",
-                maxWidth: "320px",
+                padding: isMobile ? "0.7rem 1rem" : "1.2rem 2.2rem",
+                minWidth: isMobile ? "120px" : "260px",
+                maxWidth: isMobile ? "140px" : "320px",
               }}
             >
               <img
                 src={person.img}
                 alt={person.name}
                 style={{
-                  width: "160px",
-                  height: "200px",
+                  width: isMobile ? "80px" : "160px",
+                  height: isMobile ? "100px" : "200px",
                   borderRadius: "0.8rem",
                   objectFit: "cover",
                   boxShadow: "0 4px 18px 0 rgba(37, 99, 235, 0.13)",
@@ -155,7 +164,7 @@ export default function TourEnd() {
               <div
                 style={{
                   fontWeight: "bold",
-                  fontSize: "1.3rem",
+                  fontSize: isMobile ? "1rem" : "1.3rem",
                   color: "#2563eb",
                   marginBottom: "0.3rem",
                   textAlign: "center",
@@ -165,7 +174,7 @@ export default function TourEnd() {
               </div>
               <div
                 style={{
-                  fontSize: "1.1rem",
+                  fontSize: isMobile ? "0.95rem" : "1.1rem",
                   color: "#1e293b",
                   textAlign: "center",
                 }}
@@ -179,13 +188,13 @@ export default function TourEnd() {
       <button
         onClick={() => navigate("/tour-intro")}
         style={{
-          marginTop: "1.5rem",
+          marginTop: isMobile ? "1.2rem" : "1.5rem",
           background: "linear-gradient(90deg, #60a5fa 0%, #2563eb 100%)",
           color: "#fff",
           border: "none",
           borderRadius: "999px",
-          padding: "0.9rem 2.2rem",
-          fontSize: "1.2rem",
+          padding: isMobile ? "0.7rem 1.5rem" : "0.9rem 2.2rem",
+          fontSize: isMobile ? "1rem" : "1.2rem",
           fontWeight: "bold",
           cursor: "pointer",
           textDecoration: "none",
@@ -214,14 +223,14 @@ export default function TourEnd() {
       </button>
       <div
         style={{
-          marginTop: "2rem",
+          marginTop: isMobile ? "1.2rem" : "2rem",
           color: "#1e293b",
-          fontSize: "1.5rem",
+          fontSize: isMobile ? "1.1rem" : "1.5rem",
           fontWeight: "bold",
           textAlign: "center",
           background: "rgba(255,255,255,0.85)",
           borderRadius: "0.6rem",
-          padding: "0.7rem 2.2rem",
+          padding: isMobile ? "0.5rem 1.2rem" : "0.7rem 2.2rem",
           boxShadow: "0 2px 8px #2563eb44",
         }}
       >
