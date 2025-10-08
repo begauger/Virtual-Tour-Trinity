@@ -11,7 +11,13 @@ import TourFifthSixth from "./TourSections/TourFifthSixth";
 import TourSeventhEighth from "./TourSections/TourSeventhEighth";
 import TourEnd from "./TourSections/TourEnd"; // Import the end slide
 
+function useIsMobile() {
+  return window.matchMedia("(max-width: 700px)").matches;
+}
+
 function Home() {
+  const isMobile = useIsMobile();
+
   return (
     <div
       style={{
@@ -63,76 +69,83 @@ function Home() {
           minHeight: "100vh",
           width: "100vw",
           display: "flex",
-          flexDirection: "row",
+          flexDirection: isMobile ? "column" : "row",
           alignItems: "center",
           justifyContent: "center",
+          padding: isMobile ? "2rem 0.5rem" : "0",
         }}
       >
         {/* Left: Large Image */}
         <div
           style={{
-            flex: "0 0 45%",
+            flex: isMobile ? "unset" : "0 0 45%",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             position: "relative",
-            minWidth: 320,
+            minWidth: isMobile ? "unset" : 320,
+            marginBottom: isMobile ? "2rem" : 0,
           }}
         >
-          <div
-            style={{
-              position: "absolute",
-              width: "420px",
-              height: "420px",
-              borderRadius: "50%",
-              background: "radial-gradient(circle, #63b3ed55 0%, transparent 70%)",
-              filter: "blur(16px)",
-              zIndex: 0,
-            }}
-          />
+          {!isMobile && (
+            <div
+              style={{
+                position: "absolute",
+                width: "420px",
+                height: "420px",
+                borderRadius: "50%",
+                background: "radial-gradient(circle, #63b3ed55 0%, transparent 70%)",
+                filter: "blur(16px)",
+                zIndex: 0,
+              }}
+            />
+          )}
           <img
             src="/logo.webp"
             alt="Church"
             style={{
-              width: "350px",
-              maxWidth: "95%",
+              width: isMobile ? "220px" : "350px",
+              maxWidth: "95vw",
               height: "auto",
               borderRadius: "2rem",
               boxShadow: "0 8px 32px 0 rgba(44, 62, 80, 0.2)",
               objectFit: "cover",
               background: "#fff",
-              padding: "1.5rem",
+              padding: isMobile ? "0.8rem" : "1.5rem",
               position: "relative",
               zIndex: 1,
             }}
           />
           <div
             style={{
-              marginTop: "2rem",
+              marginTop: "1.2rem",
               color: "#bee3f8",
               fontWeight: "bold",
-              fontSize: "1.3rem",
+              fontSize: isMobile ? "1.05rem" : "1.3rem",
               textAlign: "center",
               textShadow: "0 2px 8px #2227",
               position: "relative",
               zIndex: 1,
+              maxWidth: isMobile ? "90vw" : "unset",
             }}
           >
             Thank you for taking the Virtual Tour!
           </div>
         </div>
         {/* Vertical Divider */}
-        <div
-          style={{
-            width: "4px",
-            height: "60vh",
-            background: "linear-gradient(180deg, #90cdf4 0%, #63b3ed 100%)",
-            borderRadius: "2px",
-            margin: "0 3vw",
-            boxShadow: "0 0 12px #63b3ed55",
-          }}
-        />
+        {!isMobile && (
+          <div
+            style={{
+              width: "4px",
+              height: "60vh",
+              background: "linear-gradient(180deg, #90cdf4 0%, #63b3ed 100%)",
+              borderRadius: "2px",
+              margin: "0 3vw",
+              boxShadow: "0 0 12px #63b3ed55",
+            }}
+          />
+        )}
         {/* Right: Welcome Text and Button */}
         <div
           style={{
@@ -141,33 +154,37 @@ function Home() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            width: isMobile ? "100%" : "unset",
           }}
         >
-          <div style={{ position: "relative", marginBottom: "2rem", width: "fit-content" }}>
+          <div style={{ position: "relative", marginBottom: isMobile ? "1.2rem" : "2rem", width: "fit-content" }}>
             {/* Expanded Glow effect under heading */}
-            <div
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "65%",
-                transform: "translate(-50%, -50%)",
-                width: "600px",
-                height: "120px",
-                borderRadius: "50%",
-                background: "radial-gradient(circle, #63b3ed77 0%, transparent 75%)",
-                filter: "blur(24px)",
-                zIndex: 0,
-                pointerEvents: "none",
-              }}
-            />
+            {!isMobile && (
+              <div
+                style={{
+                  position: "absolute",
+                  left: "50%",
+                  top: "65%",
+                  transform: "translate(-50%, -50%)",
+                  width: "600px",
+                  height: "120px",
+                  borderRadius: "50%",
+                  background: "radial-gradient(circle, #63b3ed77 0%, transparent 75%)",
+                  filter: "blur(24px)",
+                  zIndex: 0,
+                  pointerEvents: "none",
+                }}
+              />
+            )}
             <h1
               style={{
-                fontSize: "2.7rem",
+                fontSize: isMobile ? "1.5rem" : "2.7rem",
                 marginBottom: 0,
                 position: "relative",
                 zIndex: 1,
                 textAlign: "center",
                 letterSpacing: "1px",
+                maxWidth: isMobile ? "90vw" : "unset",
               }}
             >
               Welcome to Our Church & School
@@ -180,8 +197,8 @@ function Home() {
               color: "#222",
               border: "none",
               borderRadius: "999px",
-              padding: "0.9rem 2.2rem",
-              fontSize: "1.2rem",
+              padding: isMobile ? "0.7rem 1.4rem" : "0.9rem 2.2rem",
+              fontSize: isMobile ? "1rem" : "1.2rem",
               fontWeight: "bold",
               cursor: "pointer",
               textDecoration: "none",
@@ -204,7 +221,7 @@ function Home() {
             <span style={{
               display: "inline-block",
               transition: "transform 0.18s",
-              fontSize: "1.3em",
+              fontSize: isMobile ? "1.1em" : "1.3em",
               marginLeft: "0.2em"
             }}>➔</span>
           </Link>

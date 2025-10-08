@@ -185,6 +185,44 @@ export default function TourEnd() {
           ))}
         </div>
       </div>
+      {/* Previous Button */}
+      <button
+        onClick={() => navigate("/tour-seventh-eighth")}
+        style={{
+          marginTop: isMobile ? "1.2rem" : "1.5rem",
+          background: "linear-gradient(90deg, #63b3ed 0%, #38b2ac 100%)",
+          color: "#222",
+          border: "none",
+          borderRadius: "999px",
+          padding: isMobile ? "0.7rem 1.5rem" : "0.9rem 2.2rem",
+          fontSize: isMobile ? "1rem" : "1.2rem",
+          fontWeight: "bold",
+          cursor: "pointer",
+          textDecoration: "none",
+          boxShadow: "0 3px 18px #63b3ed55",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "0.7rem",
+          transition: "transform 0.09s, box-shadow 0.09s, opacity 0.7s",
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.transform = "scale(1.07)";
+          e.currentTarget.style.boxShadow = "0 6px 24px #38b2ac88";
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.transform = "scale(1)";
+          e.currentTarget.style.boxShadow = "0 3px 18px #63b3ed55";
+        }}
+      >
+        <span style={{
+          display: "inline-block",
+          transition: "transform 0.09s",
+          fontSize: "1.4em",
+          marginRight: "0.2em"
+        }}>←</span>
+        Previous
+      </button>
+      {/* Start Tour Again Button */}
       <button
         onClick={() => navigate("/tour-intro")}
         style={{

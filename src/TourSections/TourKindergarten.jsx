@@ -57,7 +57,7 @@ export default function TourKindergarten() {
         gap: isMobile ? "2rem" : "0",
       }}
     >
-      {/* Left: Teacher Image, Titles, and Next Button */}
+      {/* Left: Teacher Image, Titles, and Next/Previous Buttons */}
       <div
         style={{
           flex: isMobile ? "unset" : "0 0 50%",
@@ -172,6 +172,47 @@ export default function TourKindergarten() {
             fontSize: "1.4em",
             marginLeft: "0.2em"
           }}>➔</span>
+        </button>
+        {/* Previous Button */}
+        <button
+          onClick={() => navigate("/tour-preschool")}
+          style={{
+            marginTop: "1.2rem",
+            background: "linear-gradient(90deg, #63b3ed 0%, #38b2ac 100%)",
+            color: "#222",
+            border: "none",
+            borderRadius: "999px",
+            padding: isMobile ? "0.7rem 1.5rem" : "0.7rem 1.8rem",
+            fontSize: isMobile ? "1rem" : "1.2rem",
+            fontWeight: "bold",
+            cursor: "pointer",
+            textDecoration: "none",
+            boxShadow: "0 3px 18px #63b3ed55",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.7rem",
+            transition: "transform 0.09s, box-shadow 0.09s, opacity 0.7s",
+            position: "relative",
+            zIndex: 1,
+            opacity: step >= 6 ? 1 : 0,
+            pointerEvents: step >= 6 ? "auto" : "none",
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = "scale(1.07)";
+            e.currentTarget.style.boxShadow = "0 6px 24px #38b2ac88";
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.transform = "scale(1)";
+            e.currentTarget.style.boxShadow = "0 3px 18px #63b3ed55";
+          }}
+        >
+          <span style={{
+            display: "inline-block",
+            transition: "transform 0.09s",
+            fontSize: "1.4em",
+            marginRight: "0.2em"
+          }}>←</span>
+          Previous
         </button>
       </div>
 
