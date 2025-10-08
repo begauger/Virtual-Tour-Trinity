@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const slideshowImages = [
-  "/cover.jpg",
-  "/cover2.jpg",
-  "/cover3.jpg",
+  "/newcover.jpg",
+  "/newcover2.jpg",
+  "/newcover4.jpg",
   "/rock.jpg",
   "/cranberry.jpg",
   "/sidepart.jpg",
