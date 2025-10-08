@@ -52,7 +52,7 @@ export default function TourIntro() {
       {/* Video background */}
       <video
         ref={videoRef}
-        src="/walking.mp4"
+        src="/walkingcomp.mp4"
         style={{
           position: "fixed",
           top: 0,

@@ -25,7 +25,7 @@ function Home() {
     >
       {/* Fullscreen translucent video background */}
       <video
-        src="/navbar.MP4"
+        src="/navbarcomp.mp4"
         style={{
           position: "fixed",
           top: 0,
